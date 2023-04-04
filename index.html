@@ -14,7 +14,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="npm/swiper-8/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="css/intlTelInput.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>TeslaX</title>
     <link rel="canonical" href="https://technology-tesla.com" />
@@ -314,7 +313,6 @@
           </div>
         </div>
       </div>
-
       <footer class="footer">
         <div class="container">
           <a href="index.html" class="header__logo">Tesla<span>X</span></a>
@@ -325,87 +323,6 @@
     <script src="npm/swiper-8/swiper-bundle.min.js"></script>
     <script src="jquery-3.6.0.min.js"></script>
     <script src="js/main.js"></script>
-    <script
-      type="text/javascript"
-      src="ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"
-    ></script>
-    <script type="text/javascript">
-      function intlTelSetGeoCode(code) {
-        var geofields = document.querySelectorAll("input[name=country]");
-        for (var gid = 0; gid < geofields.length; gid++)
-          geofields[gid].value = code;
-      }
-      function intlTelSetPhoneCode(code) {
-        var phonecode = document.querySelectorAll(".phonecc");
-        for (var pid = 0; pid < phonecode.length; pid++)
-          phonecode[pid].value = code;
-      }
-      var allthephonefields = document.querySelectorAll("input[name=phone]");
-      var initialphonecc = 0;
-      var initialphonegc = false;
-      for (var atpi = 0; atpi < allthephonefields.length; atpi++) {
-        var iti = window.intlTelInput(allthephonefields[atpi], {
-          initialCountry: "auto",
-          nationalMode: true,
-          autoPlaceholder: "aggressive",
-          formatOnDisplay: true,
-          separateDialCode: true,
-          utilsScript: "ajax/libs/intl-tel-input/17.0.13/js/utils.js",
-          geoIpLookup: function (setgeo) {
-            fetch("https://ipinfo.io", {
-              headers: { Accept: "application/json" },
-            })
-              .then((response) => response.json())
-              .then((r) => setgeo(r && r.country ? r.country : "ru"));
-          },
-        });
-        var itg = iti.getSelectedCountryData();
-        if (itg.dialCode) initialphonecc = itg.dialCode;
-        if (itg.iso2) initialphonegc = itg.iso2;
-        allthephonefields[atpi].addEventListener(
-          "countrychange",
-          function (event) {
-            var iti = window.intlTelInputGlobals.getInstance(event.target);
-            if (iti != undefined) {
-              var geo = iti.getSelectedCountryData();
-              intlTelSetPhoneCode(geo.dialCode);
-              intlTelSetGeoCode(geo.iso2);
-            }
-          }
-        );
-      }
-      if (initialphonecc) intlTelSetPhoneCode(initialphonecc);
-      if (initialphonegc) intlTelSetGeoCode(initialphonegc);
-    </script>
-    <script type="text/javascript">
-      var url_string = window.location.href;
-      var url = new URL(url_string);
-      var country_code = url.searchParams.get("country_code");
-      var city = url.searchParams.get("city");
-      var click_id = url.searchParams.get("clickid");
-      var campaign = url.searchParams.get("campaign");
-      var gclid = url.searchParams.get("gclid");
-      $("#country_code").val(country_code);
-      $("#city").val(city);
-      $("#click_id").val(click_id);
-      $("#campaign").val(campaign);
-      $("#gclid").val(gclid);
-      console.log(country_code, city, click_id, campaign, gclid);
-    </script>
-    <script src="js/back.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        window.vitBack(
-          "https://bilibrary-io.com/?clickid=" +
-            click_id +
-            "&campaign=" +
-            campaign +
-            "&utm_source={widget_id}&sid6={teaser_id}",
-          true
-        );
-      });
-    </script>
-
     <script
       defer=""
       src="https://cdn.unitedmarkets.cc/build/bundle.js?v=1637321581"
